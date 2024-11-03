@@ -1,5 +1,5 @@
+// カートに商品を追加する関数
 function addToCart(productId) {
-    // 商品情報（例としてハードコードしていますが、実際は商品情報を使います）
     const product = {
         id: productId,
         name: `Product ${productId}`,
@@ -11,13 +11,14 @@ function addToCart(productId) {
     localStorage.setItem('cart', JSON.stringify(cart));
 
     alert(`${product.name} has been added to your cart!`);
-    updateCartDisplay();
 }
+
+// カートの内容を表示する関数
 function displayCart() {
     const cartItems = document.getElementById('cart-items');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    cartItems.innerHTML = ''; // 表示をリセット
+    cartItems.innerHTML = '';
     let total = 0;
 
     cart.forEach(item => {
@@ -33,8 +34,13 @@ function displayCart() {
 
     document.getElementById('cart-total').textContent = `Total: $${total.toFixed(2)}`;
 }
+
+// カートをクリアする関数
 function clearCart() {
     localStorage.removeItem('cart');
     displayCart();
     alert('Cart has been cleared.');
 }
+
+// ページ読み込み時にカート内容を表示
+document.addEventListener('DOMContentLoaded', displayCart);
